@@ -1,0 +1,1 @@
+php -S 192.168.2.106:8888 -t C:\Users\aungz\Desktop\workspace\thoofficialmm.com\git\thoofficialmm.com\public
