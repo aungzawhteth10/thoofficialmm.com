@@ -1,9 +1,9 @@
 <?php
-$app->get('/', function ($request, $response) {
-    return $this->view->render($response, 'creating.twig', []);
-});
 $app->get('/aaa', function ($request, $response) {
     return "aaa";
+});
+$app->get('/', function ($request, $response) {
+    return $this->view->render($response, 'creating.twig', []);
 });
 // $app->get('/{id}', function ($request, $response, $args) {
 //     return $args['id'];
