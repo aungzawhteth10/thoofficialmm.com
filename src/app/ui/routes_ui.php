@@ -1,12 +1,12 @@
 <?php
 $app->get('/', function ($request, $response) {
+    return 'home';
     return $this->view->render($response, 'creating.twig', []);
 });
 $app->get('/{id}/', function ($request, $response, $args) {
     return redirect('/' . $args['id']);
 });
 $app->get('/{id}', function ($request, $response, $args) {
-    return $args['id'];
     $screenList = ['home'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
     return $this->view->render($response, $screen . '.twig', []);
