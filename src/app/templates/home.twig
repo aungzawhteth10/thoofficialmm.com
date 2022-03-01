@@ -10,7 +10,7 @@ var logic = {
     logic.dataload();
   },
   dataload:function(){
-    THO.GET("api/ApiHome", {}, function(text, data, xml) {
+    THO.GET("/api/ApiHome", {}, function(text, data, xml) {
       var json = data.json();
       logic.items = json;
       THO.setItems("items", logic.items);
