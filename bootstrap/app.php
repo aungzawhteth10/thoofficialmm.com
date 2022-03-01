@@ -18,3 +18,6 @@ $container['view'] = function ($container) {
    ));
    return $view;
 };
+$container['ApiHome'] = function () {
+    return new App\api\ApiHome;
+};

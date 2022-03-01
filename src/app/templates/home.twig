@@ -1,0 +1,39 @@
+{% include "base.html.twig"%}
+<div class="container-fluid" id="items" name="items">
+</div>
+<script>
+var logic = {
+  items:{},
+  noOfCols:0,
+  init:function(){
+    window.onresize = logic.itemRearange;
+    logic.dataload();
+  },
+  dataload:function(){
+    THO.GET("api/ApiHome", {}, function(text, data, xml) {
+      var json = data.json();
+      logic.items = json;
+      THO.setItems("items", logic.items);
+      logic.setNoOfCols();
+    });
+  },
+  setNoOfCols:function(){
+    var width = window.innerWidth;
+    logic.noOfCols = parseInt(width/140);
+  },
+  itemRearange:function(){
+    console.log("itemRearange");
+    var width = window.innerWidth;
+    var noOfCols = parseInt(width/140);
+    if(noOfCols != logic.noOfCols){
+      logic.noOfCols = noOfCols;
+      console.log(logic.noOfCols);
+      THO.setItems("items", logic.items);
+    }
+  }
+};
+webix.ready(function () {
+  logic.init();
+});
+</script>
+{% include "footer.html.twig"%}

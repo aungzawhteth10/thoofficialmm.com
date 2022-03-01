@@ -1,13 +1,11 @@
 <?php
-namespace messenger\api;
+namespace App\api;
 class ApiBase 
 {
    protected $session;
    protected $HtmlHelper;
    protected $tablesData;
    public function __construct () {
-      $this->session = $_SESSION;
-      $this->tablesData = new \messenger\common\TablesData;
    }
    public function toError($ErrorMsg)
    {
