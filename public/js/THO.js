@@ -3,22 +3,23 @@ THO.footer = {template:"<footer>&copyHdKyiKyi.com, 2022</footer>", height:70, bo
 THO.session = {};
 THO.token = "";
 THO.setItems = function(id = "", items = []) {
-    var width = window.innerWidth;
-    var noOfColumn = parseInt(width/140);
+    var winWidth = (window.innerWidth);
+    var noOfColumn = parseInt(winWidth/180);
     var noOfRow = parseInt(items.length/noOfColumn) + 1;
+    var colWidth = parseInt(winWidth/noOfColumn);
     var html  = "";
     for (let i = 0; i < items.length; i++) {
         if ((i+1) % noOfColumn == 1) {//first item of a row
             html += "<div class='row'>";
         }
-        html += THO.createItem(items[i]);
+        html += THO.createItem(items[i], colWidth);
         if ((i+1) % noOfColumn == 0) {//last item of a row
             html += "</div>";
         }
     }
     var lastRowBlankCol = noOfColumn - (items.length % noOfColumn);
     for (let i = 0; i < lastRowBlankCol; i++) {//add blank column to fufil the no of column
-        html += "<div class='col' style='width: 140px;'></div>";
+        html += "<div class='col' style='width: 170px;'></div>";
     }
     if (items.length % noOfColumn != 0) {
         html += "</div>";
@@ -26,10 +27,10 @@ THO.setItems = function(id = "", items = []) {
     var dom = $("#" + id);
     dom.html(html);
 };
-THO.createItem = function(item, width = 240) {
+THO.createItem = function(item, width = 170) {
     var html  = "";
-        html += "<div class='col' style='width: 140px;'>";
-        html += "<img src='" + item.image + "' style='width: 140px;'>";
+        html += "<div class='col' style='width: 170px;'>";
+        html += "<img src='" + item.image + "' style='width: 170px;'>";
         html += "<p>" + item.prize + "Ks</p>";
         html += "</div>";
     return html;

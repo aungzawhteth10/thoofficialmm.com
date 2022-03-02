@@ -19,13 +19,13 @@ var logic = {
   },
   setNoOfCols:function(){
     var width = window.innerWidth;
-    logic.noOfCols = parseInt(width/140);
+    logic.noOfCols = parseInt(width/180);
   },
   itemRearange:function(){
     var width = window.innerWidth;
     console.log("itemRearange");
     console.log("itemRearange：" + width);
-    var noOfCols = parseInt(width/140);
+    var noOfCols = parseInt(width/180);
     if(noOfCols != logic.noOfCols){
       logic.noOfCols = noOfCols;
       console.log(logic.noOfCols);
