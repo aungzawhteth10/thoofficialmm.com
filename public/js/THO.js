@@ -31,7 +31,8 @@ THO.createItem = function(item, width = 170) {
     var html  = "";
         html += "<div class='col' style='width: 170px;'>";
         html += "<img src='" + item.image + "' style='width: 170px;'>";
-        html += "<p>" + item.prize + "Ks</p>";
+        html += "<p>Size : " + item.size + "</p>";
+        html += "<p>Price : " + item.price + "Ks</p>";
         html += "</div>";
     return html;
 };
