@@ -138,6 +138,7 @@ THO.createProductImages = function(images, id) {
 THO.createProductInfo = function(info, id) {
     var html =  "";
         html += "<p>" + info.name + "</p>";
+        html += "<p>" + info.description + "</p>";
         html += "<p>Size : " + info.size + "</p>";
         html += "<p>Price : " + info.price + "</p>";
         html += "<a href='http://m.me/thoofficialmm' target='_blank'>To Order</a>";
