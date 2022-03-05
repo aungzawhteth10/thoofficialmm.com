@@ -12,7 +12,7 @@ THO.setItems = function(id = "", items = []) {
         if ((i+1) % noOfColumn == 1) {//first item of a row
             html += "<div class='row'>";
         }
-        html += THO.createItem(items[i], colWidth);
+        html += THO.createItem(items[i], colWidth, i);
         if ((i+1) % noOfColumn == 0) {//last item of a row
             html += "</div>";
         }
@@ -27,9 +27,12 @@ THO.setItems = function(id = "", items = []) {
     var dom = $("#" + id);
     dom.html(html);
 };
-THO.createItem = function(item, width = 170) {
+THO.createItem = function(item, width = 170, i) {
     var html  = "";
         html += "<div class='col itemCol' style='width: 170px;'>";
+        if (i==1 || i==3){
+            html += "<img src='https://st2.depositphotos.com/1186248/6498/i/450/depositphotos_64982201-stock-photo-out-of-stock.jpg' width='50' class='outOfStock'>";
+        }
         html += "<img src='" + item.image + "' style='width: 170px;' onclick='THO.pageMoveItemDetail(" + item.product_id + ")' class='itemListImage'>";
         html += "<p>" + item.name + "</p>";
         html += "<p>Price : " + item.price + "Ks</p>";
