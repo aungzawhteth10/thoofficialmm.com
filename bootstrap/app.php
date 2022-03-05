@@ -21,3 +21,6 @@ $container['view'] = function ($container) {
 $container['ApiHome'] = function () {
     return new \App\api\ApiHome;
 };
+$container['ApiProduct'] = function () {
+    return new \App\api\ApiProduct;
+};
