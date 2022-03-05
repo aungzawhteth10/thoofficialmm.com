@@ -29,8 +29,8 @@ THO.setItems = function(id = "", items = []) {
 };
 THO.createItem = function(item, width = 170) {
     var html  = "";
-        html += "<div class='col' style='width: 170px;'>";
-        html += "<img src='" + item.image + "' style='width: 170px;'>";
+        html += "<div class='col itemCol' style='width: 170px;'>";
+        html += "<img src='" + item.image + "' style='width: 170px;' onclick='THO.pageMoveItemDetail(" + item.product_id + ")' class='itemListImage'>";
         html += "<p>" + item.name + "</p>";
         html += "<p>Size : " + item.size + "</p>";
         html += "<p>Price : " + item.price + "Ks</p>";
@@ -38,6 +38,10 @@ THO.createItem = function(item, width = 170) {
         html += "</div>";
     return html;
 };
+THO.pageMoveItemDetail = function(id = '') {
+    console.log(id);
+    location.href = "/product?id=" + id;
+}
 THO.errorMessage = function(message) {
     webix.alert({
     title:"",

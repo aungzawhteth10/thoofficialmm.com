@@ -1,11 +1,11 @@
 <?php
 $app->get('/', function ($request, $response) {
-    return $this->view->render($response, 'creating.twig', []);
+    return renderView($this->view, $response, 'creating');
 });
 $app->get('/{id}', function ($request, $response, $args) {
-    $screenList = ['home'];
+    $screenList = ['home', 'product'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
-    return $this->view->render($response, $screen . '.twig', []);
+    return renderView($this->view, $response, $screen);
 });
 // $app->get('/{id}/', function ($request, $response, $args) {
 //     return redirect('/' . $args['id']);
@@ -18,4 +18,9 @@ $app->get('/{id}', function ($request, $response, $args) {
 function redirect ($url) 
 {
     return '<script>location.href= "'. $url . '"</script>';
+}
+//render the view
+function renderView($view, $response, $screen){
+    $view->offsetSet('HtmlHelper', new \App\ui\HtmlHelper);
+    return $view->render($response, $screen . '.twig', []);
 }

@@ -9,6 +9,9 @@ var logic = {
     window.onresize = logic.itemRearange;
     logic.dataload();
   },
+  moveDetail:function(e){
+    // console.log(e);
+  },
   dataload:function(){
     THO.GET("/api/ApiHome", {}, function(text, data, xml) {
       var json = data.json();
