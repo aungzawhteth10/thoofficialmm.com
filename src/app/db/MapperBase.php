@@ -1,17 +1,17 @@
 <?php
-namespace messenger\db;
+namespace App\db;
 class MapperBase 
 {
     protected $pdo;
     public function __construct()
     {
         try {
-            if (isset($_SESSION['MessengerPdo'])) {
-                $this->pdo = $_SESSION['MessengerPdo'];
+            if (isset($_SESSION['Pdo'])) {
+                $this->pdo = $_SESSION['Pdo'];
             } else {
-                $dsn = 'mysql:dbname=u460610115_messenger; host=sql255.main-hosting.eu';
-                $username = 'u460610115_messenger_root';
-                $password = 'Toorwss9199';
+                $dsn = 'mysql:dbname=u460610115_thoofficialmm; host=sql255.main-hosting.eu';
+                $username = 'u460610115_thoofficialmm';
+                $password = 'Toormmthoofficial21';
                 $this->pdo = new \PDO($dsn, $username, $password);
             }
         } catch (\PDOException $e) {

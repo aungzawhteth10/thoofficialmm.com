@@ -24,3 +24,6 @@ $container['ApiHome'] = function () {
 $container['ApiProduct'] = function () {
     return new \App\api\ApiProduct;
 };
+$container['ApiAdmin'] = function () {
+    return new \App\api\ApiAdmin;
+};

@@ -3,7 +3,7 @@ $app->get('/', function ($request, $response) {
     return renderView($this->view, $response, 'creating');
 });
 $app->get('/{id}', function ($request, $response, $args) {
-    $screenList = ['home', 'product'];
+    $screenList = ['home', 'product', 'admin'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
     return renderView($this->view, $response, $screen);
 });
