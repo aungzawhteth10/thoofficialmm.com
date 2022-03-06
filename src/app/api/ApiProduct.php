@@ -14,7 +14,10 @@ class ApiProduct extends ApiBase
         if (count($product) == 0) {
             return json_encode($result, JSON_UNESCAPED_UNICODE);
         }
-        $result['images'] = explode(',', $product['images']);
+        $images = explode(',', $product['images']);
+        foreach ($images as $key => $value) {
+            $result['images'][] = $value . '?' . time();
+        }
         $result['info']   = [
             'name'        => $product['name'],
             'description' => $product['description'],

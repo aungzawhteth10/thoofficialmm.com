@@ -10,7 +10,7 @@ class ApiHome extends ApiBase
         foreach ($productArr as $key => $value) {
             $items[] = [
                 'product_code' => $value['product_code'],
-                'image'        => explode(',', $value['images'])[0], 'logo.png',
+                'image'        => (explode(',', $value['images'])[0] ?? 'logo.png') . '?' . time(),
                 'name'         => $value['name'],
                 'price'        => $value['price'],
                 'avablility'   => $value['avablility'],
