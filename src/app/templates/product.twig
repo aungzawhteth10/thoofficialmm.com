@@ -6,6 +6,10 @@
 .border{
   border: 1px solid #dbe9e8;
 }
+p{
+  text-align:justify;  
+  text-justify:auto;
+}
 </style>
 <div class="container-fluid" style="max-width:600px;">
   <div id="product_images" class="carousel slide border" data-ride="carousel" data-interval="false">
@@ -30,8 +34,7 @@ var logic = {
   },
   dataload:function(){
     var urlParams = THO.getUrlParams();
-    console.log(urlParams);
-    THO.GET("/api/ApiProduct", {id:urlParams.id}, function(text, data, xml) {
+    THO.GET("/api/ApiProduct", {code:urlParams.code}, function(text, data, xml) {
       var json = data.json();
       THO.createProductImages(json.images, "product_images");
       THO.createProductInfo(json.info, "product_info");

@@ -28,20 +28,21 @@ THO.setItems = function(id = "", items = []) {
     dom.html(html);
 };
 THO.createItem = function(item, width = 170, i) {
+    console.log(item.product_code.toString());
     var html  = "";
         html += "<div class='col itemCol' style='width: 170px;'>";
-        if (item.out_of_stock == "1"){
+        if (item.avablility == "0"){
             html += "<img src='https://st2.depositphotos.com/1186248/6498/i/450/depositphotos_64982201-stock-photo-out-of-stock.jpg' width='50' class='outOfStock'>";
         }
-        html += "<img src='" + item.image + "' style='width: 170px;' onclick='THO.pageMoveItemDetail(" + item.product_id + ")' class='itemListImage'>";
-        html += "<p>" + item.name + "</p>";
-        html += "<p>Price : " + item.price + "Ks</p>";
-        html += "</div>";
+        html += '<img src="public/images/product/' + item.image + '" style="width: 170px;" onclick="THO.pageMoveItemDetail(\'' + item.product_code + '\')" class="itemListImage">';
+        html += '<p>' + item.name + '</p>';
+        html += '<p>Price : ' + item.price + '</p>';
+        html += '</div>';
     return html;
 };
-THO.pageMoveItemDetail = function(id = '') {
-    console.log(id);
-    location.href = "/product?id=" + id;
+THO.pageMoveItemDetail = function(code = '') {
+    var code = '' + code;
+    location.href = "/product?code=" + code;
 }
 THO.getUrlParams = function getAllUrlParams(url) {
   // get query string from url (optional) or window
@@ -96,7 +97,6 @@ THO.getUrlParams = function getAllUrlParams(url) {
   return obj;
 };
 THO.createProductImages = function(images, id) {
-    console.log(images);
     var html  = "";
     var count = images.length;
     if(count == 0){
@@ -118,7 +118,7 @@ THO.createProductImages = function(images, id) {
         }else{
             html += "<div class='carousel-item'>";
         }
-        html += "<img src='public/images/product/" + images[i] +".png' class='d-block w-100' alt='" + images[i] + "'>";
+        html += "<img src='public/images/product/" + images[i] +"' class='d-block w-100' alt='" + images[i] + "'>";
         html += "</div>";
     }
         html += "</div>";
@@ -136,12 +136,15 @@ THO.createProductImages = function(images, id) {
     $("#" + id).html(html);
 };
 THO.createProductInfo = function(info, id) {
-    var html =  "";
-        html += "<p>" + info.name + "</p>";
-        html += "<p>" + info.description + "</p>";
-        html += "<p>Size : " + info.size + "</p>";
-        html += "<p>Price : " + info.price + "</p>";
-        html += "<a href='http://m.me/thoofficialmm' target='_blank'>To Order</a>";
+    if(info.length == 0){
+        return false;
+    }
+    var html =  '';
+        html += '<p style="font-weight: bold;">' + info.name + '</p>';
+        html += '<p>' + info.description + '</p>';
+        html += '<p>Size : ' + info.size + '</p>';
+        html += '<p>Price : ' + info.price + '</p>';
+        html += '<a href="http://m.me/thoofficialmm" target="_blank">To Order</a>';
     $("#" + id).html(html);
 }
 THO.errorMessage = function(message) {
