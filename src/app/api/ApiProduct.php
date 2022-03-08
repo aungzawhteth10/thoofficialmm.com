@@ -16,6 +16,9 @@ class ApiProduct extends ApiBase
         }
         $images = explode(',', $product['images']);
         foreach ($images as $key => $value) {
+            if ($value == '') {
+                $value = 'logo.png';
+            }
             $result['images'][] = $value . '?' . time();
         }
         $result['info']   = [
