@@ -19,6 +19,7 @@ class ApiProduct extends ApiBase
             $result['images'][] = $value . '?' . time();
         }
         $result['info']   = [
+            'product_id'  => $product['product_id'],
             'name'        => $product['name'],
             'description' => $product['description'],
             'size'        => $product['size'],

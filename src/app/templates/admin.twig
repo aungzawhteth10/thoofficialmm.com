@@ -6,17 +6,69 @@
 .border{
   border: 1px solid #dbe9e8;
 }
+.button{
+  width: 150px;
+}
+.outOfStock{
+  position: absolute;
+}
 </style>
-<button type="button" class="btn btn-outline-success" id="btnCreateJson">Create Json</button>
+<div class="container-fluid" id="controls" name="controls">
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <button type="button" class="btn btn-outline-success" id="btnAddNew">Add New Item</button>
+    </div>
+    <div class="col-auto" button>
+      <button type="button" class="btn btn-outline-success" id="btnCreateJson">Create Json</button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" id="items" name="items">
+</div>
 <script>
 var logic = {
+  items:{},
+  noOfCols:0,
   init:function(){
+    window.onresize = logic.itemRearange;
     $("#btnCreateJson").on("click",function(){ 
       logic.createJson();
     });
+    $("#btnAddNew").on("click",function(){ 
+      logic.addNewProduct();
+    });
+    logic.dataload();
+  },
+  dataload:function(){
+    THO.GET("/api/ApiAdmin", {}, function(text, data, xml) {
+      var json = data.json();
+      logic.items = json;
+      THO.setItemsAdmin("items", logic.items);
+      logic.setNoOfCols();
+    });
+  },
+  setNoOfCols:function(){
+    var width = window.innerWidth;
+    logic.noOfCols = parseInt(width/180);
+  },
+  itemRearange:function(){
+    var width = window.innerWidth;
+    console.log("itemRearange");
+    console.log("itemRearange：" + width);
+    var noOfCols = parseInt(width/180);
+    if((noOfCols != logic.noOfCols) && (noOfCols != 1)){
+      logic.noOfCols = noOfCols;
+      console.log(logic.noOfCols);
+      THO.setItemsAdmin("items", logic.items);
+    }
   },
   createJson:function(){
     THO.POST("/api/ApiAdmin", {}, function(text, data, xml) {
+    });
+  },
+  addNewProduct:function(){
+    THO.POST("/api/ApiAdmin/addNewProduct", {}, function(text, data, xml) {
+      THO.pageMoveProductEdit(data.json());
     });
   }
 };

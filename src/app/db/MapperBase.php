@@ -205,4 +205,13 @@ class MapperBase
         }
         return $sql;
     }
+    public function idSaiban($id, $table)
+    {
+        $sql= 'select MAX(' . $id . ') from ' . $table;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetchAll();
+        $maxId = $row[0][0] ?? 0;
+        return $maxId + 1;
+    }
 }

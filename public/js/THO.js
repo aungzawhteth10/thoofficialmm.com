@@ -34,15 +34,57 @@ THO.createItem = function(item, width = 170, i) {
         if (item.avablility == "0"){
             html += "<img src='https://st2.depositphotos.com/1186248/6498/i/450/depositphotos_64982201-stock-photo-out-of-stock.jpg' width='50' class='outOfStock'>";
         }
-        html += '<img src="public/images/product/' + item.image + '" style="width: 170px;" onclick="THO.pageMoveItemDetail(\'' + item.product_code + '\')" class="itemListImage">';
+        html += '<img src="public/images/product/' + item.image + '" style="width: 170px;" onclick="THO.pageMoveProductDetail(\'' + item.product_code + '\')" class="itemListImage">';
         html += '<p>' + item.name + '</p>';
         html += '<p>Price : ' + item.price + '</p>';
         html += '</div>';
     return html;
 };
-THO.pageMoveItemDetail = function(code = '') {
-    var code = '' + code;
+THO.setItemsAdmin = function(id = "", items = []) {
+    var winWidth = (window.innerWidth);
+    var noOfColumn = parseInt(winWidth/180);
+    var noOfRow = parseInt(items.length/noOfColumn) + 1;
+    var colWidth = parseInt(winWidth/noOfColumn);
+    var html  = "";
+    for (let i = 0; i < items.length; i++) {
+        if ((i+1) % noOfColumn == 1) {//first item of a row
+            html += "<div class='row'>";
+        }
+        html += THO.createItemAdmin(items[i], colWidth, i);
+        if ((i+1) % noOfColumn == 0) {//last item of a row
+            html += "</div>";
+        }
+    }
+    var lastRowBlankCol = noOfColumn - (items.length % noOfColumn);
+    for (let i = 0; i < lastRowBlankCol; i++) {//add blank column to fufil the no of column
+        html += "<div class='col' style='width: 170px;'></div>";
+    }
+    if (items.length % noOfColumn != 0) {
+        html += "</div>";
+    }
+    var dom = $("#" + id);
+    dom.html(html);
+};
+THO.createItemAdmin = function(item, width = 170, i) {
+    console.log(item.product_code.toString());
+    var html  = "";
+        html += "<div class='col itemCol' style='width: 170px;'>";
+        if (item.avablility == "0"){
+            html += "<img src='https://st2.depositphotos.com/1186248/6498/i/450/depositphotos_64982201-stock-photo-out-of-stock.jpg' width='50' class='outOfStock'>";
+        }
+        html += '<img src="public/images/product/' + item.image + '" style="width: 170px;" onclick="THO.pageMoveProductEdit(\'' + item.product_code + '\')" class="itemListImage">';
+        html += '<p>' + item.name + '</p>';
+        html += '<p>Price : ' + item.price + '</p>';
+        html += '</div>';
+    return html;
+};
+THO.pageMoveProductDetail = function(code = "") {
+    var code = "" + code;
     location.href = "/product?code=" + code;
+}
+THO.pageMoveProductEdit = function(code = "") {
+    var code = "" + code;
+    location.href = "/productEdit?code=" + code;
 }
 THO.getUrlParams = function getAllUrlParams(url) {
   // get query string from url (optional) or window
@@ -146,6 +188,14 @@ THO.createProductInfo = function(info, id) {
         html += '<p>Price : ' + info.price + '</p>';
         html += '<a href="http://m.me/thoofficialmm" target="_blank">To Order</a>';
     $("#" + id).html(html);
+}
+THO.getFormData = function(form = ""){
+    var unindexed_array =  $("#" + form).serializeArray();
+    var indexed_array = {};
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+    return indexed_array;
 }
 THO.errorMessage = function(message) {
     webix.alert({
