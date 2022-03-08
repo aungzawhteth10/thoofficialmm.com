@@ -63,7 +63,8 @@ var logic = {
     }
   },
   createJson:function(){
-    THO.POST("/api/ApiAdmin", {}, function(text, data, xml) {
+    THO.POST("/api/ApiAdmin/createJson", {}, function(text, data, xml) {
+      webix.message("Json Updated");
     });
   },
   addNewProduct:function(){
