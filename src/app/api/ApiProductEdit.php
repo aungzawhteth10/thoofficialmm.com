@@ -48,4 +48,43 @@ class ApiProductEdit extends ApiBase
         $count = $dbProductMapper->update($dmProduct);
         return json_encode($count, JSON_UNESCAPED_UNICODE);
    }
+   public function uploadImage($request, $response)
+   {
+        $file = $_FILES['fileToUpload'];
+        if ($file['name'] == '') {
+            return false;
+        }
+        $filename = $file['name'];
+        move_uploaded_file($file['tmp_name'],
+            "public/images/product/" . $filename);
+        return true;
+   }
+   public function add2ImageList($request, $response)
+   {
+        $postData = $_POST;
+        if ($postData['file_name'] == '') {
+            return false;
+        }
+        $dbProductMapper = new \App\db\DbProductMapper;
+        $dmProduct = new \App\model\DmProduct;
+        $dmProduct->product_id = $postData['product_id'];
+        $product =  $dbProductMapper->find($dmProduct);
+        if (count($product) == 0) {
+            return false;
+        }
+        $newFileName = $product[0]['product_code'] . '_' . $postData['file_name'];
+        if ($product[0]['images'] == '') {
+            $images = $newFileName;
+        } else {
+            $images = $product[0]['images'] . ',' . $newFileName;
+        }
+        $dbProductMapper = new \App\db\DbProductMapper;
+        $dmProduct = new \App\model\DmProduct;
+        $dmProduct->product_id = $postData['product_id'];
+        $dmProduct->images     = $images;
+        $count = $dbProductMapper->update($dmProduct);
+        $filePath = "public/images/product/";
+        rename($filePath . $postData['file_name'], $filePath . $newFileName);
+        return json_encode($count, JSON_UNESCAPED_UNICODE);
+   }
 }
