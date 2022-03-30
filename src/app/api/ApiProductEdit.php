@@ -31,6 +31,8 @@ class ApiProductEdit extends ApiBase
             'size'                 => $product['size'],
             'price'                => $product['price'],
             'product_availability' => $product['avablility'],
+            'product_collection'   => $product['collection'],
+            'product_type'         => $product['type'],
         ];
         return json_encode($result, JSON_UNESCAPED_UNICODE);
    }
@@ -45,6 +47,8 @@ class ApiProductEdit extends ApiBase
         $dmProduct->price       = $postData['product_price'];
         $dmProduct->description = $postData['product_description'];
         $dmProduct->avablility  = $postData['product_availability'];
+        $dmProduct->collection  = $postData['product_collection'];
+        $dmProduct->type        = $postData['product_type'];
         $count = $dbProductMapper->update($dmProduct);
         return json_encode($count, JSON_UNESCAPED_UNICODE);
    }
