@@ -1,0 +1,56 @@
+{% include "base.html.twig"%}
+<style>
+.outOfStock{
+  position: absolute;
+}
+p{
+  word-wrap: break-word
+}
+</style>
+<p>{{collection}} Collection [{{type}}]</p>
+<div class="container-fluid" id="items" name="items">
+</div>
+<script>
+var logic = {
+  items:{},
+  noOfCols:0,
+  init:function(){
+    window.onresize = logic.itemRearange;
+    logic.dataload();
+  },
+  moveDetail:function(e){
+    // console.log(e);
+  },
+  dataload:function(){
+    var _param = {
+      collection:"{{collection}}",
+      type:"{{type}}"
+    };
+    THO.GET("/api/ApiCollection", _param, function(text, data, xml) {
+      var json = data.json();
+      logic.items = json;
+      THO.setItems("items", logic.items);
+      logic.setNoOfCols();
+    });
+  },
+  setNoOfCols:function(){
+    var width = window.innerWidth;
+    logic.noOfCols = parseInt(width/180);
+  },
+  itemRearange:function(){
+    var width = window.innerWidth;
+    console.log("itemRearange");
+    console.log("itemRearange：" + width);
+    var noOfCols = parseInt(width/180);
+    if((noOfCols != logic.noOfCols) && (noOfCols != 1)){
+      logic.noOfCols = noOfCols;
+      console.log(logic.noOfCols);
+      THO.setItems("items", logic.items);
+    }
+  }
+};
+webix.ready(function () {
+  logic.init();
+});
+</script>
+{% include "footer.html.twig"%}

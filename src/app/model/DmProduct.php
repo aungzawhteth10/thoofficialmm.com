@@ -11,6 +11,8 @@ class DmProduct extends DataModel
         'description'  => 'string',
         'images'       => 'string',
         'avablility'   => 'string',
+        'collection'   => 'string',
+        'type'         => 'string',
     ];
     public static $primary_key = [
         'product_id',

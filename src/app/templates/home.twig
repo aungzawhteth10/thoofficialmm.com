@@ -1,48 +1,48 @@
 {% include "base.html.twig"%}
 <style>
+.carousel-indicators li{
+  background-color: #000000;
+}
+.border{
+  border: 1px solid #dbe9e8;
+}
+.btn{
+  width: 150px;
+  height: 100px;
+  margin-top: 10px;
+}
 .outOfStock{
   position: absolute;
 }
 p{
   word-wrap: break-word
 }
+.center {
+  text-align: center;
+}
 </style>
-<div class="container-fluid" id="items" name="items">
+<h5 class="center">Welcome To THO Official Website<br>Myanmar</h5>
+<p>Woolen Collection</p>
+<div class="container-fluid" id="controls" name="controls">
+  <div class="row">
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary" onclick="location.href='/collection?collection=Woolen&type=Top'">Top</button>
+    </div>
+    <div class="col-auto" button>
+      <button type="button" class="btn btn-primary" onclick="location.href='/collection?collection=Woolen&type=Cardigan'">Cardigan</button>
+    </div>
+  </div>
+</div>
+<p>Designer Collection</p>
+<div class="container-fluid" id="controls" name="controls">
+  <div class="row">
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary" onclick="location.href='/collection?collection=Designer&type=Top'">Top</button>
+    </div>
+  </div>
 </div>
 <script>
 var logic = {
-  items:{},
-  noOfCols:0,
-  init:function(){
-    window.onresize = logic.itemRearange;
-    logic.dataload();
-  },
-  moveDetail:function(e){
-    // console.log(e);
-  },
-  dataload:function(){
-    THO.GET("/api/ApiHome", {}, function(text, data, xml) {
-      var json = data.json();
-      logic.items = json;
-      THO.setItems("items", logic.items);
-      logic.setNoOfCols();
-    });
-  },
-  setNoOfCols:function(){
-    var width = window.innerWidth;
-    logic.noOfCols = parseInt(width/180);
-  },
-  itemRearange:function(){
-    var width = window.innerWidth;
-    console.log("itemRearange");
-    console.log("itemRearange：" + width);
-    var noOfCols = parseInt(width/180);
-    if((noOfCols != logic.noOfCols) && (noOfCols != 1)){
-      logic.noOfCols = noOfCols;
-      console.log(logic.noOfCols);
-      THO.setItems("items", logic.items);
-    }
-  }
 };
 webix.ready(function () {
   logic.init();
