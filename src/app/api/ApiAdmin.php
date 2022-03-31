@@ -2,8 +2,8 @@
 namespace App\api;
 class ApiAdmin extends ApiBase
 {
-   public function init($request, $response)
-   {
+    public function init($request, $response)
+    {
         $dbProductMapper = new \App\db\DbProductMapper;
         $dmProduct = new \App\model\DmProduct;
         $product =  $dbProductMapper->find();
@@ -20,9 +20,9 @@ class ApiAdmin extends ApiBase
             ];
         }
         return parent::tojson($items);
-   }
-   public function createJson($request, $response)
-   {
+    }
+    public function createJson($request, $response)
+    {
         $dbProductMapper = new \App\db\DbProductMapper;
         $dmProduct = new \App\model\DmProduct;
         $product =  $dbProductMapper->find();
@@ -30,9 +30,9 @@ class ApiAdmin extends ApiBase
         $jsonFilePath = getcwd() . '/src/app/files/product.json';
         file_put_contents($jsonFilePath, $json_data);
         return parent::tojson($json_data);
-   }
-   public function addNewProduct($request, $response)
-   {
+    }
+    public function addNewProduct($request, $response)
+    {
         $dbProductMapper = new \App\db\DbProductMapper;
         $dmProduct = new \App\model\DmProduct;
         $newId =  $dbProductMapper->idSaiban('product_id', 'product');
@@ -41,5 +41,19 @@ class ApiAdmin extends ApiBase
         $dmProduct->product_code = $code;
         $count = $dbProductMapper->insert($dmProduct);
         return parent::tojson($code);
-   }
+    }
+    public function makeNoPublish($request, $response)
+    {
+        $jsonFilePath = getcwd() . '/src/app/files/publish.json';
+        $json_data = json_encode(['publish' => 0], JSON_UNESCAPED_UNICODE);
+        file_put_contents($jsonFilePath, $json_data);
+        return parent::tojson(0);
+    }
+    public function makePublish($request, $response)
+    {
+        $jsonFilePath = getcwd() . '/src/app/files/publish.json';
+        $json_data = json_encode(['publish' => 1], JSON_UNESCAPED_UNICODE);
+        file_put_contents($jsonFilePath, $json_data);
+        return parent::tojson(1);
+    }
 }

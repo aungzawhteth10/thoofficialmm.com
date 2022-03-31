@@ -4,6 +4,9 @@ $app->get('/api/ApiProduct', 'App\api\ApiProduct:init');
 $app->get('/api/ApiAdmin', 'App\api\ApiAdmin:init');
 $app->post('/api/ApiAdmin/createJson', 'App\api\ApiAdmin:createJson');
 $app->post('/api/ApiAdmin/addNewProduct', 'App\api\ApiAdmin:addNewProduct');
+$app->post('/api/ApiAdmin/makeNoPublish', 'App\api\ApiAdmin:makeNoPublish');
+$app->post('/api/ApiAdmin/makePublish', 'App\api\ApiAdmin:makePublish');
+
 $app->get('/api/ApiProductEdit', 'App\api\ApiProductEdit:init');
 $app->post('/api/ApiProductEdit/update', 'App\api\ApiProductEdit:update');
 $app->post('/api/ApiProductEdit/uploadImage', 'App\api\ApiProductEdit:uploadImage');

@@ -26,6 +26,16 @@ p{
     </div>
   </div>
 </div>
+<div class="container-fluid" id="publish_control" name="publish_control">
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <button type="button" class="btn btn-outline-success" id="publish">Publish</button>
+    </div>
+    <div class="col-auto" button>
+      <button type="button" class="btn btn-outline-success" id="notPublish">Not Publish</button>
+    </div>
+  </div>
+</div>
 <div class="container-fluid" id="items" name="items">
 </div>
 <script>
@@ -39,6 +49,12 @@ var logic = {
     });
     $("#btnAddNew").on("click",function(){ 
       logic.addNewProduct();
+    });
+    $("#notPublish").on("click",function(){ 
+      logic.makeNoPublish();
+    });
+    $("#publish").on("click",function(){ 
+      logic.makePublish();
     });
     logic.dataload();
   },
@@ -73,6 +89,16 @@ var logic = {
   addNewProduct:function(){
     THO.POST("/api/ApiAdmin/addNewProduct", {}, function(text, data, xml) {
       THO.pageMoveProductEdit(data.json());
+    });
+  },
+  makeNoPublish:function(){
+    THO.POST("/api/ApiAdmin/makeNoPublish", {}, function(text, data, xml) {
+      webix.message("Make No Publish");
+    });
+  },
+  makePublish:function(){
+    THO.POST("/api/ApiAdmin/makePublish", {}, function(text, data, xml) {
+      webix.message("Make Publish");
     });
   }
 };
