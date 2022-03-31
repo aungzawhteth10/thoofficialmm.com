@@ -14,7 +14,7 @@ $app->get('/collection', function ($request, $response, $args) {
 $app->get('/{id}', function ($request, $response, $args) {
     $screenList = ['home', 'product', 'adminhome', 'productedit'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
-    $screen = (in_array($screen, ['adminhome', 'productedit']) || isPublish()) ? $screen : 'creating';
+    $screen = (in_array(strtolower($screen), ['adminhome', 'productedit']) || isPublish()) ? $screen : 'creating';
     return renderView($this->view, $response, $screen);
 });
 // $app->get('/{id}/', function ($request, $response, $args) {
