@@ -84,7 +84,7 @@ THO.pageMoveProductDetail = function(code = "") {
 }
 THO.pageMoveProductEdit = function(code = "") {
     var code = "" + code;
-    location.href = "/productEdit?code=" + code;
+    location.href = "/productEdit?code=" + code + "&key=55456875632212325";
 }
 THO.getUrlParams = function getAllUrlParams(url) {
   // get query string from url (optional) or window

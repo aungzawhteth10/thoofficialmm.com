@@ -12,9 +12,11 @@ $app->get('/collection', function ($request, $response, $args) {
     return renderView($this->view, $response, 'collection', $arr);
 });
 $app->get('/{id}', function ($request, $response, $args) {
+    $key = $_GET['key'] ?? '';
+    error_log(print_r($key, true));
     $screenList = ['home', 'product', 'adminhome', 'productedit'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
-    $screen = (in_array(strtolower($screen), ['adminhome', 'productedit']) || isPublish()) ? $screen : 'creating';
+    $screen = ((in_array(strtolower($screen), ['adminhome', 'productedit']) && $key == '55456875632212325') || isPublish()) ? $screen : 'creating';
     return renderView($this->view, $response, $screen);
 });
 // $app->get('/{id}/', function ($request, $response, $args) {
