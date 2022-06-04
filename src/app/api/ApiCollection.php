@@ -13,7 +13,7 @@ class ApiCollection extends ApiBase
         $productArr = json_decode(file_get_contents($jsonFilePath), TRUE);
         foreach ($productArr as $key => $value) {
             if ($value['collection'] != $collection) continue;
-            if ($value['type'] != $type) continue;
+            //if ($value['type'] != $type) continue;
             $images = explode(',', $value['images']);
             $image = ($images[0] == '') ? 'logo.png' : $images[0];
             $items[] = [
