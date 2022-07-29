@@ -16,7 +16,10 @@ $app->get('/{id}', function ($request, $response, $args) {
     error_log(print_r($key, true));
     $screenList = ['home', 'product', 'adminhome', 'productedit'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
-    $screen = ((in_array(strtolower($screen), ['adminhome', 'productedit']) && $key == '55456875632212325') || isPublish()) ? $screen : 'creating';
+    $screen = ((in_array(strtolower($screen), ['adminhome', 'productedit']) && $key == '55456875632212325')) ? $screen : 'home';
+    if (!isPublish()) {
+        $screen = 'creating';
+    }
     return renderView($this->view, $response, $screen);
 });
 // $app->get('/{id}/', function ($request, $response, $args) {
