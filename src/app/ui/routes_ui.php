@@ -16,7 +16,7 @@ $app->get('/{id}', function ($request, $response, $args) {
     error_log(print_r($key, true));
     $screenList = ['home', 'product', 'adminhome', 'productedit'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
-    $screen = ((in_array(strtolower($screen), ['adminhome', 'productedit']) && $key == '55456875632212325')) ? $screen : 'home';
+    $screen = ((in_array(strtolower($screen), ['adminhome', 'productedit']) && $key != '55456875632212325')) ? 'home' : $screen;
     if (!isPublish()) {
         $screen = 'creating';
     }
