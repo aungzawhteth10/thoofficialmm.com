@@ -14,7 +14,7 @@ $app->get('/collection', function ($request, $response, $args) {
 $app->get('/{id}', function ($request, $response, $args) {
     $key = $_GET['key'] ?? '';
     error_log(print_r($key, true));
-    $screenList = ['home', 'product', 'adminhome', 'productedit'];
+    $screenList = ['home', 'product', 'adminhome', 'productedit', 'templateTest'];
     $screen = in_array(strtolower($args['id']), $screenList) ? $args['id'] : 'creating';
     $screen = ((in_array(strtolower($screen), ['adminhome', 'productedit']) && $key != '55456875632212325')) ? 'home' : $screen;
     if (!isPublish()) {
